@@ -1,0 +1,120 @@
+//Micaela Vazquez Div J
+/*Dojo2
+*/
+#define TIME 5000
+#define TAM_E 13
+#define TAM_L 4
+#define A 7
+#define B 8
+#define F 6
+#define G 5
+#define E 4
+#define D 2
+#define C A5
+#define PULSADOR 9
+#define TRUE  1
+#define FALSE 0
+int elementos[TAM_E]={1,2,3,4,5,6,7,8,9,10,11,12,13};
+int leds[TAM_L] = {13,12,11,10};
+int frecuencias[] = {523.25,659.263,783.99,987.77};
+int flag = FALSE;
+
+
+void setup()
+{
+ for(int i= 0;i<TAM_E;i++)
+  {
+    pinMode(elementos[i], OUTPUT);  
+  }
+  pinMode(A5,OUTPUT);
+  pinMode(PULSADOR,INPUT_PULLUP);
+}
+
+void loop()
+{
+  int presiono = digitalRead(PULSADOR); 
+  if(presiono == LOW)
+  {
+    flag = TRUE;
+  }
+  //LEDS
+  if(flag == TRUE)
+  {
+  for(int i = 0; i<= 2; i++)
+  {
+    LedEncenderApagar(leds[i],i);
+  }
+  
+  for(int i = 3; i>= 1 ; i--)
+  {
+    LedEncenderApagar(leds[i],i);
+  }
+  }
+}
+
+void LedEncenderApagar(int led, int i)
+{
+  digitalWrite(C, 0);
+  digitalWrite(led, HIGH);//encendemos Led
+  encenderSegmento(led);//dibuja el num
+  
+  BuzzerEncendido(3,frecuencias[i]);
+  delay(TIME); //esperamos
+  apagarSegmento();//apagamos todos
+  digitalWrite(led, LOW);// apagamos led
+}
+
+void encenderSegmento(int num)
+{
+  switch(num)
+  {
+    case 10:
+    digitalWrite(A, HIGH);//0
+  	digitalWrite(B, HIGH);
+  	digitalWrite(C, HIGH);
+  	digitalWrite(D, HIGH);
+  	digitalWrite(E, HIGH);
+  	digitalWrite(F, HIGH);
+    	break;
+    case 11:
+    digitalWrite(B, HIGH);//1
+  	digitalWrite(C, HIGH);
+        break;
+    case 12:
+    digitalWrite(A, HIGH);//2
+  	digitalWrite(B, HIGH);
+  	digitalWrite(D, HIGH);
+  	digitalWrite(E, HIGH);
+  	digitalWrite(G, HIGH);
+    	break;
+    case 13:
+    digitalWrite(A, HIGH);//3
+  	digitalWrite(B, HIGH);
+    digitalWrite(C, HIGH);
+    digitalWrite(D, HIGH);
+    digitalWrite(G, HIGH);
+    	break;
+  }
+}
+
+void apagarSegmento()
+{
+  digitalWrite(A, LOW);
+  digitalWrite(B, LOW);
+  digitalWrite(C, LOW);
+  digitalWrite(D, LOW);
+  digitalWrite(E, LOW);
+  digitalWrite(F, LOW);
+  digitalWrite(G, LOW);
+}
+
+void BuzzerEncendido(int pinBuzzer,int frecuencia)
+{ 
+    //Suena
+  tone(pinBuzzer,frecuencia); 
+  delay(1000);
+  
+  //No suena
+    noTone(pinBuzzer); 
+    delay(1000);
+}
