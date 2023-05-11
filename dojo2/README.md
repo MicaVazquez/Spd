@@ -26,5 +26,5 @@
   <p>Recibe el pin del Buzzer y el número de la frecuencia y se lo pasa a la función Tone y noTone.</p>
 </ul>
 <h2> Link al proyecto</h2>
-<p>https://www.tinkercad.com/things/f745EOw9kos-dojo-2/editel?sharecode=tU5LuJSTOX6YFpeb7OT8jqkdg52voF0WcZ2nupE6ZcM</p>
+<p>https://www.tinkercad.com/things/f745EOw9kos</p>
 
